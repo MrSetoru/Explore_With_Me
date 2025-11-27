@@ -20,7 +20,7 @@ public class StatServiceImpl implements StatService {
 
     final StatRepository statRepository;
     final HitMapper hitMapper;
-    private static final LocalDateTime MIN_DATE = LocalDateTime.of(2020, 1, 1, 0, 0);
+    private static final LocalDateTime MIN_DATE = LocalDateTime.of(1999, 1, 1, 0, 0);
 
     @Override
     public ResponseEntity<Object> saveHit(HitDtoRequest hitDtoRequest) {
@@ -92,18 +92,18 @@ public class StatServiceImpl implements StatService {
     }
 
     private void requestValidate(LocalDateTime start, LocalDateTime end, List<String> uris) {
-        if (start == null || end == null) {
-            throw new IllegalArgumentException("Начало и конец периода не могут быть null");
-        }
+            if (start == null || end == null) {
+                throw new IllegalArgumentException("Начало и конец периода не могут быть null");
+            }
 
-        if (start.isBefore(MIN_DATE)) {
-            throw new IllegalArgumentException("Дата начала не может быть раньше " + MIN_DATE);
-        }
+            if (start.isBefore(MIN_DATE)) {
+                throw new IllegalArgumentException("Дата начала не может быть раньше " + MIN_DATE);
+            }
 
-        if (start.isAfter(end)) {
-            throw new IllegalArgumentException("Дата начала должна быть раньше даты окончания");
+            if (start.isAfter(end)) {
+                throw new IllegalArgumentException("Дата начала должна быть раньше даты окончания");
+            }
         }
-    }
 
     private void saveValidate(HitDtoRequest hitDtoRequest) {
         if (hitDtoRequest.getApp() == null || hitDtoRequest.getApp().isBlank()) {

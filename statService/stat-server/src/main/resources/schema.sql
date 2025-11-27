@@ -5,3 +5,4 @@ CREATE TABLE IF NOT EXISTS hits (
     ip VARCHAR(512) NOT NULL,
     dateTime TIMESTAMP NOT NULL
 );
+
