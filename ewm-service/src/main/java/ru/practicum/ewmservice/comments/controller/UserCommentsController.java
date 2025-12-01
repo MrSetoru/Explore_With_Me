@@ -43,7 +43,7 @@ public class UserCommentsController {
 
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<Void> deleteUserComment(@PathVariable Long userId,
-                                              @PathVariable Long commentId) {
+                                                  @PathVariable Long commentId) {
         log.info("Получен запрос на удаление нового комментария id={} ", commentId);
         commentService.deleteUserComment(userId, commentId);
         log.info("Комментарий удалён");
@@ -57,4 +57,5 @@ public class UserCommentsController {
         log.info("Комментарии пользователя в количестве {} получены", userComments.size());
         return ResponseEntity.ok(userComments);
     }
+
 }
