@@ -31,3 +31,4 @@ public class Hit {
     @Column(name = "dateTime", nullable = false)
     private Instant dateTime;
 }
+

@@ -47,4 +47,5 @@ public interface EventRepository extends JpaRepository<Event, Long> {
                              @Param("rangeStart") Instant rangeStart,
                              @Param("rangeEnd") Instant rangeEnd,
                              Pageable pageable);
+
 }

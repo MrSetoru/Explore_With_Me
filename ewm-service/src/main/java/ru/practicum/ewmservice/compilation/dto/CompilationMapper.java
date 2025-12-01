@@ -44,4 +44,5 @@ public class CompilationMapper {
         compilation.setEvents(events);
         return compilation;
     }
+
 }

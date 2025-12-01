@@ -5,4 +5,5 @@ public enum State {
     PUBLISHED,
     WAITING,
     CANCELED
+
 }

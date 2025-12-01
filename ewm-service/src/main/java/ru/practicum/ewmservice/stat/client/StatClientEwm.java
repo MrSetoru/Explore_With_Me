@@ -69,5 +69,6 @@ public class StatClientEwm {
                 .mapToLong(HitDtoStatResponse::hits)
                 .sum();
     }
+
 }
 

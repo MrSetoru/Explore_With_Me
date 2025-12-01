@@ -45,5 +45,6 @@ public class AdminUserController {
         log.info("Пользователь id={} удалён", userId);
         return ResponseEntity.noContent().build(); // 204
     }
+
 }
 

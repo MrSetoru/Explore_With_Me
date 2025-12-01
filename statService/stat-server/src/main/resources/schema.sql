@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS hits (
     dateTime TIMESTAMP NOT NULL
 );
 
+

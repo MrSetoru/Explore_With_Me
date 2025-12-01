@@ -28,11 +28,6 @@ public class PrivateRequestController {
     @PostMapping
     public ResponseEntity<ParticipationRequestDto> createUserRequests(@PathVariable Long userId,
                                                                                   @RequestParam Long eventId) {
-        //нельзя добавить повторный запрос (Ожидается код ошибки 409)
-        //инициатор события не может добавить запрос на участие в своём событии (Ожидается код ошибки 409)
-        //нельзя участвовать в неопубликованном событии (Ожидается код ошибки 409)
-        //если у события достигнут лимит запросов на участие - необходимо вернуть ошибку (Ожидается код ошибки 409)
-        //если для события отключена пре-модерация запросов на участие, то запрос должен автоматически перейти в состояние подтвержденного
         log.info("Запрос от пользователя на создание запроса участия");
         ParticipationRequestDto response = requestService.createUserRequest(userId, eventId);
         log.info("Запрос участия создан создана");

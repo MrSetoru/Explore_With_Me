@@ -16,6 +16,7 @@ public class AdminCategoryController {
 
     private final CategoryService categoryService;
 
+
     @PostMapping
     public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
         //Обратите внимание: имя категории должно быть уникальным

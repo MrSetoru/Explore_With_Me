@@ -19,3 +19,4 @@ public interface StatRepository extends JpaRepository<Hit,Long> {
     Collection<Hit> getStatsByUris(Instant start, Instant end, List<String> uris);
 
 }
+

@@ -20,3 +20,4 @@ management:
 stat:
   server:
     url: ${STAT_SERVER_URL:http://statserver:9090}
+

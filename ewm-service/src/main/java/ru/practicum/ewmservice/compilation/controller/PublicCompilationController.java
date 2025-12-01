@@ -21,8 +21,7 @@ public class PublicCompilationController {
     public ResponseEntity<Collection<CompilationDto>> getCompilation(@RequestParam(name = "pinned", required = false) Boolean pinned,
                                                                      @RequestParam(name = "from", defaultValue = "0") Integer from,
                                                                      @RequestParam(name = "size", defaultValue = "10") Integer size) {
-        //В случае, если по заданным фильтрам не найде
-        // но ни одной подборки, возвращает пустой список
+
         log.info("Публичный запрос на получение подборок");
         Collection<CompilationDto> compilations = compilationService.getCompilations(pinned, from, size);
         log.info("Подборки получена успешно");
@@ -34,7 +33,6 @@ public class PublicCompilationController {
         log.info("Публичный запрос на получение подборки");
         CompilationDto compilation = compilationService.getCompilationById(compId);
         log.info("Подборка получена успешно");
-        //В случае, если подборки с заданным id не найдено, возвращает статус код 404
         return ResponseEntity.ok(compilation);
     }
 

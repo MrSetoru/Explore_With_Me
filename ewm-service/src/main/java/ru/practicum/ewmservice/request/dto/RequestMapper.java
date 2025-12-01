@@ -59,5 +59,4 @@ public class RequestMapper {
     private LocalDateTime truncateToMicroseconds(LocalDateTime ldt) {
         return ldt.withNano((ldt.getNano() / 1000) * 1000);
     }
-
 }

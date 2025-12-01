@@ -31,7 +31,7 @@ public class NewEventDto {
     @JsonSetter("paid")
     public void setPaid(Object paid) {
         if (paid == null) {
-            this.paid = false; // по дефолту
+            this.paid = false;
         } else if (paid instanceof Boolean b) {
             this.paid = b;
         } else {

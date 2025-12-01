@@ -30,8 +30,6 @@ public class AdminEventController {
                                                                  @RequestParam(required = false) String rangeEnd,
                                                                  @RequestParam(name = "from", defaultValue = "0") Integer from,
                                                                  @RequestParam(name = "size", defaultValue = "10") Integer size) {
-        // возвращает полную информацию обо всех событиях подходящих под переданные условия
-        // В случае, если по заданным фильтрам не найдено ни одного события, возвращает пустой список
         log.info("Запрос от администратора на поиск событий");
 
         Collection<EventDtoFull> events = eventService.searchEvents(users, states, categories, rangeStart, rangeEnd, from, size);
@@ -43,10 +41,6 @@ public class AdminEventController {
     @PatchMapping("/{eventId}")
     public ResponseEntity<EventDtoFull> editEvent(@PathVariable Long eventId,
                                                   @RequestBody(required = false) UpdateEventAdminRequest event) {
-        //Редактирование данных любого события администратором. Валидация данных не требуется. Обратите внимание:
-        //дата начала изменяемого события должна быть не ранее чем за час от даты публикации. (Ожидается код ошибки 409)
-        //событие можно публиковать, только если оно в состоянии ожидания публикации (Ожидается код ошибки 409)
-        //событие можно отклонить, только если оно еще не опубликовано (Ожидается код ошибки 409)
         log.info("Запрос от администратора на изменение события");
 
         if (event == null) {

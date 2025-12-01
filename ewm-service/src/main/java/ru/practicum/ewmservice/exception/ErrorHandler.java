@@ -51,5 +51,4 @@ public class ErrorHandler {
         return ResponseEntity.status(409).body(body);
     }
 
-
 }

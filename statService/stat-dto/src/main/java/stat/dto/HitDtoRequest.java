@@ -13,3 +13,4 @@ public class HitDtoRequest {
     private String uri;
     private String ip;
 }
+

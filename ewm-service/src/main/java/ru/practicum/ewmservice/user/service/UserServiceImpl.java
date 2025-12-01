@@ -93,4 +93,5 @@ public class UserServiceImpl implements UserService {
             throw new ConditionsNotMetException("Длина имени пользователя должна быть от 2 до 200 символов");
         }
     }
+
 }

@@ -14,4 +14,5 @@ import java.util.List;
 public class RequestDtoForUpdResponse {
     private List<ParticipationRequestDto> confirmedRequests;
     private List<ParticipationRequestDto> rejectedRequests;
+
 }

@@ -91,4 +91,5 @@ public class UserEventController {
         log.info("Заявки обновлены");
         return ResponseEntity.ok(requestsUpd);
     }
+
 }

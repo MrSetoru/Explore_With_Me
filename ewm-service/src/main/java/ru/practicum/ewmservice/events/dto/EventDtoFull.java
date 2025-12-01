@@ -38,4 +38,5 @@ public class EventDtoFull {
     private String state;
     private String title;
     private long views;
+
 }

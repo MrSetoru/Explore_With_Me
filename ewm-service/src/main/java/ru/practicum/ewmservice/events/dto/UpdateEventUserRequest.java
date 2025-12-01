@@ -25,4 +25,5 @@ public class UpdateEventUserRequest {
     private Boolean requestModeration;
     private StateAction stateAction;
     private String title;
+
 }

@@ -17,4 +17,5 @@ public class Category {
 
     @Column(nullable = false, unique = true, length = 255)
     private String name;
+
 }

@@ -32,5 +32,4 @@ public interface RequestRepository extends JpaRepository<Request, Long> {
 
     List<Request> findByIdIn (List<Long> ids);
 
-
 }

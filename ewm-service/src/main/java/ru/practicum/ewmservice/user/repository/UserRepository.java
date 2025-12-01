@@ -8,4 +8,5 @@ import ru.practicum.ewmservice.user.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
+
 }

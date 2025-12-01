@@ -466,4 +466,5 @@ public class EventServiceImpl implements EventService {
             throw new ConflictException("Опубликованное событие нельзя отклонить");
         }
     }
+
 }

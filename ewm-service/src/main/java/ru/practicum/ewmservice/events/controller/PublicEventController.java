@@ -34,8 +34,6 @@ public class PublicEventController {
                                                                        @RequestParam(name = "from", defaultValue = "0") Integer from,
                                                                        @RequestParam(name = "size", defaultValue = "10") Integer size,
                                                                        HttpServletRequest request) {
-        // возвращает полную информацию обо всех событиях подходящих под переданные условия
-        // В случае, если по заданным фильтрам не найдено ни одного события, возвращает пустой список
         log.info("Публичный запрос на получение всех событий с сортировкой");
         log.info("client ip: {}", request.getRemoteAddr());
         log.info("endpoint path: {}", request.getRequestURI());
@@ -55,7 +53,6 @@ public class PublicEventController {
     @GetMapping("/{eventId}")
     public ResponseEntity<EventDtoFull> getEventById(@PathVariable Long eventId,
                                                       HttpServletRequest request) {
-        // возвращает краткую информацию о событии
         log.info("Публичный запрос на получение события по id");
         log.info("client ip: {}", request.getRemoteAddr());
         log.info("endpoint path: {}", request.getRequestURI());

@@ -190,4 +190,5 @@ public class EventMapper {
                 ? LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
                 : null;
     }
+
 }

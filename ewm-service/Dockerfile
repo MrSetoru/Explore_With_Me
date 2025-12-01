@@ -10,3 +10,4 @@ EXPOSE 8080
 
 ENTRYPOINT ["/app/wait-for-it.sh", "ewm_postgres:5432", "--", "java", "-jar", "app.jar"]
 
+

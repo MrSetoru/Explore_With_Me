@@ -15,4 +15,5 @@ import java.util.List;
 public class ParticipationRequestDtoUpd {
     private List<Long> requestIds;
     private RequestStatus status;
+
 }

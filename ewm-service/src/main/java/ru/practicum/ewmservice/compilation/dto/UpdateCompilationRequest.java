@@ -10,7 +10,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UpdateCompilationRequest {
+
     private Set<Long> events;
     private Boolean pinned;
     private String title;
+
 }

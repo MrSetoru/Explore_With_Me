@@ -32,6 +32,7 @@ public class CompilationServiceImpl implements CompilationService {
     private final StatClientEwm statsClientEwm;
     private final RequestRepository requestRepository;
 
+
     @Override
     public CompilationDto createCompilation(NewCompilationDto newCompilationDto) {
         validateCompilationRequest(newCompilationDto.getTitle(), newCompilationDto.getEvents(), true);

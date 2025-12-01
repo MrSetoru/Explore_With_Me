@@ -16,4 +16,5 @@ public class NewCompilationDto {
     private Boolean pinned = false;
 
     private String title;
+
 }

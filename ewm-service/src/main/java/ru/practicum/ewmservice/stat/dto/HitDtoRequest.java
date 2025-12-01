@@ -13,4 +13,5 @@ public record HitDtoRequest(
         String uri,
         String ip,
         LocalDateTime timestamp
+
 ) {}

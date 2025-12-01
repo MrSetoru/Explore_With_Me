@@ -15,3 +15,4 @@ public class HitDtoStatResponse {
 
     private long hits;
 }
+

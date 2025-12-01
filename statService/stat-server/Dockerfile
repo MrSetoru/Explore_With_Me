@@ -8,3 +8,4 @@ RUN chmod +x /app/wait-for-it.sh
 EXPOSE 9090
 
 ENTRYPOINT ["/app/wait-for-it.sh", "stat_postgres:5432", "--", "java", "-jar", "app.jar"]
+

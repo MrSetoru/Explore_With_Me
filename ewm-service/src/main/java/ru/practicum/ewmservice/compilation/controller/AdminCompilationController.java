@@ -17,6 +17,7 @@ public class AdminCompilationController {
 
     private final CompilationService compilationService;
 
+
     @PostMapping
     public ResponseEntity<CompilationDto> createCompilation(@RequestBody NewCompilationDto newCompilationDto) {
         log.info("Запрос от администратора на создание подборки");

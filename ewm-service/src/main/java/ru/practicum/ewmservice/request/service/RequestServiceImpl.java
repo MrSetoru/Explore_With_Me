@@ -205,4 +205,5 @@ public class RequestServiceImpl implements RequestService {
             throw new ConflictException("Достигнут лимит участников для события");
         }
     }
+
 }
