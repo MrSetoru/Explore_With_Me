@@ -97,4 +97,5 @@ public class CategoryServiceImpl implements CategoryService {
                 .orElseThrow(() -> new NotFoundException("Категория с id=" + catId + " не найдена"));
 
     }
+
 }
