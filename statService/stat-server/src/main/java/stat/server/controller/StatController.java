@@ -1,6 +1,5 @@
 package stat.server.controller;
 
-import org.springframework.http.HttpStatus;
 import stat.dto.HitDtoRequest;
 import stat.dto.HitDtoStatResponse;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,7 @@ public class StatController {
     @PostMapping(path = "/hit")
     public ResponseEntity<Object> saveHit(@RequestBody HitDtoRequest hit) {
         log.info("получен запрос на сохранение данных запроса");
-        return  ResponseEntity.status(HttpStatus.CREATED).body(statService.saveHit(hit));
+        return statService.saveHit(hit);
     }
 
     @GetMapping(path = "/stats")
