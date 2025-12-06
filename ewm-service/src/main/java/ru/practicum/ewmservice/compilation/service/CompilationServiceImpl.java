@@ -23,6 +23,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CompilationServiceImpl implements CompilationService {
 
@@ -34,6 +35,7 @@ public class CompilationServiceImpl implements CompilationService {
 
 
     @Override
+    @Transactional
     public CompilationDto createCompilation(NewCompilationDto newCompilationDto) {
         validateCompilationRequest(newCompilationDto.getTitle(), newCompilationDto.getEvents(), true);
 

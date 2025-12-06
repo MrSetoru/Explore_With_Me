@@ -2,6 +2,7 @@ package ru.practicum.ewmservice.comments.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmservice.category.model.Category;
 import ru.practicum.ewmservice.comments.dto.CommentDto;
 import ru.practicum.ewmservice.comments.dto.CommentDtoToResponse;
@@ -18,6 +19,7 @@ import ru.practicum.ewmservice.user.repository.UserRepository;
 import java.util.Collection;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 
@@ -27,6 +29,7 @@ public class CommentServiceImpl implements CommentService {
     private final EventRepository eventRepository;
 
     @Override
+    @Transactional
     public CommentDtoToResponse createUserComment(Long userId, Long eventId, CommentDto commentDto) {
         validate(commentDto);
         User user = getUserIfExists(userId);
@@ -36,6 +39,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public CommentDtoToResponse editUserComment(Long commentId, CommentDto commentDto, Long userId) {
         validate(commentDto);
         Comment comment = getCommentIfExists(commentId);
@@ -48,6 +52,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void deleteUserComment(Long userId, Long commentId) {
         User user = getUserIfExists(userId);
         Comment comment = getCommentIfExists(commentId);
@@ -65,6 +70,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void deleteComment(Long commentId) {
         getCommentIfExists(commentId);
         commentRepository.deleteById(commentId);

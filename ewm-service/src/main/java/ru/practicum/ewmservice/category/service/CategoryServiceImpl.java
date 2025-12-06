@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmservice.category.dto.CategoryDto;
 import ru.practicum.ewmservice.category.dto.CategoryMapper;
 import ru.practicum.ewmservice.category.model.Category;
@@ -17,6 +18,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Slf4j
 public class CategoryServiceImpl implements CategoryService {
@@ -40,6 +42,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryDto createCategory(CategoryDto categoryDto) {
 
         validate(categoryDto);
@@ -48,6 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public void deleteCategory(Long catId) {
         if (!categoryRepository.existsById(catId)) {
             throw new NotFoundException("Категория с id =" + catId + " не найдена");
@@ -60,6 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CategoryDto editCategory(Long catId, CategoryDto categoryDto) {
         validateForUpdate(categoryDto);
         Category category = getCategoryIfExists(catId);

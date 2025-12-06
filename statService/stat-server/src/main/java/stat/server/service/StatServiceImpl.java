@@ -1,12 +1,13 @@
 package stat.server.service;
 
-import stat.dto.HitDtoRequest;
-import stat.dto.HitDtoStatResponse;
 import lombok.RequiredArgsConstructor;
-import stat.server.model.Hit;
-import stat.server.model.HitMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import stat.dto.HitDtoRequest;
+import stat.dto.HitDtoStatResponse;
+import stat.server.model.Hit;
+import stat.server.model.HitMapper;
 import stat.server.repository.StatRepository;
 
 import java.time.Instant;
@@ -15,6 +16,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class StatServiceImpl implements StatService {
 
@@ -23,6 +25,7 @@ public class StatServiceImpl implements StatService {
     private static final LocalDateTime MIN_DATE = LocalDateTime.of(1999, 1, 1, 0, 0);
 
     @Override
+    @Transactional
     public ResponseEntity<Object> saveHit(HitDtoRequest hitDtoRequest) {
         saveValidate(hitDtoRequest);
 
@@ -103,7 +106,7 @@ public class StatServiceImpl implements StatService {
             if (start.isAfter(end)) {
                 throw new IllegalArgumentException("Дата начала должна быть раньше даты окончания");
             }
-        }
+    }
 
     private void saveValidate(HitDtoRequest hitDtoRequest) {
         if (hitDtoRequest.getApp() == null || hitDtoRequest.getApp().isBlank()) {

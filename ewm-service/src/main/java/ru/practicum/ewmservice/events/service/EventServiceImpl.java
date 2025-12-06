@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.ewmservice.category.dto.CategoryDto;
 import ru.practicum.ewmservice.category.dto.CategoryMapper;
 import ru.practicum.ewmservice.category.model.Category;
@@ -40,6 +41,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Slf4j
 public class EventServiceImpl implements EventService {
@@ -127,6 +129,7 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
+    @Transactional
     public EventDtoFull editEvent(Long eventId, UpdateEventAdminRequest event) {
         Event oldEvent = getEventIfExists(eventId);
 
@@ -261,6 +264,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public EventDtoFull createUserEvent(Long userId, NewEventDto newEventDto) {
         validate(newEventDto);
         Category category = getCategoryIfExists(newEventDto.getCategory());
@@ -289,6 +293,7 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    @Transactional
     public EventDtoFull editUserEventById(Long userId, Long eventId, UpdateEventUserRequest newEventDto) {
         getUserIfExists(userId);
         Event oldEvent = getEventIfExists(eventId);

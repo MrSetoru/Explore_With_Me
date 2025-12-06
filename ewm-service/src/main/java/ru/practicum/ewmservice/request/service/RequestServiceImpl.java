@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class RequestServiceImpl implements RequestService {
 
@@ -37,6 +38,7 @@ public class RequestServiceImpl implements RequestService {
 
 
     @Override
+    @Transactional
     public ParticipationRequestDto createUserRequest(Long userId, Long eventId) {
         User user = getUserIfExists(userId);
         Event event = getEventIfExists(eventId);
@@ -155,6 +157,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
+    @Transactional
     public ParticipationRequestDto cancelUserRequest(Long userId, Long requestId) {
         User user = getUserIfExists(userId);
         Request request = getRequestIfExists(requestId);
