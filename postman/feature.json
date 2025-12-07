@@ -55,7 +55,7 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Second comment — status 201\", function () {",
+							"pm.test(\"Second comment — status 2 Newton\", function () {",
 							"    pm.response.to.have.status(201);",
 							"});",
 							"const response = pm.response.json();",
@@ -66,92 +66,95 @@
 						],
 						"type": "text/javascript"
 					}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"text\": \"Второй комментарий к другому событию\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/users/{{userId}}/events/6/comments",
-							"protocol": "http",
-							"host": ["localhost"],
-							"port": "8080",
-							"path": ["users", "{{userId}}", "events", "6", "comments"]
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\": \"Второй комментарий к другому событию\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					},
-					"response": []
+					}
 				},
+				"url": {
+					"raw": "http://localhost:8080/users/{{userId}}/events/6/comments",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["users", "{{userId}}", "events", "6", "comments"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Добавление комментария без текста",
+			"event": [
 				{
-					"name": "Добавление комментария без текста",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"400 if text is empty\", function () {",
-									"    pm.response.to.have.status(400);",
-									"});",
-									"const response = pm.response.json();",
-									"pm.expect(response.error).to.include(\"Комментарий должен содержать текст\");"
-								],
-								"type": "text/javascript"
-							}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n  \"text\": \"\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8080/users/{{userId}}/events/5/comments",
-									"protocol": "http",
-									"host": ["localhost"],
-									"port": "8080",
-									"path": ["users", "{{userId}}", "events", "5", "comments"]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Изменение существующего комментария",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"pm.test(\"200 — Comment updated\", function () {",
-											"    pm.response.to.have.status(200);",
-											"});",
-											"const response = pm.response.json();",
-											"pm.expect(response.text).to.equal(\"Обновлённый комментарий\");",
-											"pm.expect(response.creator).to.equal(pm.environment.get(\"userId\"));",
-											"pm.expect(response.event).to.equal(5);"
-										],
-										"type": "text/javascript"
-									}
-									],
-									"request": {
-										"method": "PATCH",
-										"header": [],
-										"body": {
-											"mode": "raw",
-											"raw": "{\n  \"text\": \"Обновлённый комментарий\"\n}",
-											"options": {
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"400 if text is empty\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"const response = pm.response.json();",
+							"pm.expect(response.error).to.include(\"Комментарий должен содержать текст\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/{{userId}}/events/5/comments",
+					"protocol": "http",
+					"host": ["localhost"],
+					"port": "8080",
+					"path": ["users", "{{userId}}", "events", "5", "comments"]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Изменение существующего комментария",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 — Comment updated\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"const response = pm.response.json();",
+							"pm.expect(response.text).to.equal(\"Обновлённый комментарий\");",
+							"pm.expect(response.creator).to.equal(pm.environment.get(\"userId\"));",
+							"pm.expect(response.event).to.equal(5);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\": \"Обновлённый комментарий\"\n}",
+					"options": {
 						"raw": {
 							"language": "json"
 						}
@@ -160,16 +163,9 @@
 				"url": {
 					"raw": "http://localhost:8080/users/3/comments/1",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"users",
-						"3",
-						"comments",
-						"1"
-					]
+					"path": ["users", "3", "comments", "1"]
 				}
 			},
 			"response": []
@@ -192,9 +188,7 @@
 							"    pm.expect(comments.length).to.be.at.least(2);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -202,17 +196,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/5/comments",
+					"raw": "http://localhost:8080/users/{{userId}}/comments",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"users",
-						"5",
-						"comments"
-					]
+					"path": ["users", "{{userId}}", "comments"]
 				}
 			},
 			"response": []
@@ -231,9 +219,7 @@
 							"    pm.expect(pm.response.json()).to.be.an(\"array\");",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -243,15 +229,9 @@
 				"url": {
 					"raw": "http://localhost:8080/events/5/comments",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"events",
-						"5",
-						"comments"
-					]
+					"path": ["events", "5", "comments"]
 				}
 			},
 			"response": []
@@ -263,13 +243,11 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"The comment was deeleted\", function () {",
+							"pm.test(\"The comment was deleted\", function () {",
 							"    pm.response.to.have.status(204);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -279,16 +257,9 @@
 				"url": {
 					"raw": "http://localhost:8080/users/5/comments/2",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"users",
-						"5",
-						"comments",
-						"2"
-					]
+					"path": ["users", "5", "comments", "2"]
 				}
 			},
 			"response": []
@@ -304,9 +275,7 @@
 							"    pm.response.to.have.status(400);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -316,16 +285,9 @@
 				"url": {
 					"raw": "http://localhost:8080/users/10/comments/1",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"users",
-						"10",
-						"comments",
-						"1"
-					]
+					"path": ["users", "10", "comments", "1"]
 				}
 			},
 			"response": []
@@ -341,9 +303,7 @@
 							"    pm.response.to.have.status(204);",
 							"});"
 						],
-						"type": "text/javascript",
-						"packages": {},
-						"requests": {}
+						"type": "text/javascript"
 					}
 				}
 			],
@@ -353,15 +313,9 @@
 				"url": {
 					"raw": "http://localhost:8080/admin/comments/1",
 					"protocol": "http",
-					"host": [
-						"localhost"
-					],
+					"host": ["localhost"],
 					"port": "8080",
-					"path": [
-						"admin",
-						"comments",
-						"1"
-					]
+					"path": ["admin", "comments", "1"]
 				}
 			},
 			"response": []
