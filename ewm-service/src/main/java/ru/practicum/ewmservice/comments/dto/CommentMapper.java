@@ -32,7 +32,7 @@ public class CommentMapper {
 
     private LocalDateTime toLocalDateTime(Instant instant) {
         return instant != null
-               ? LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
+                ? LocalDateTime.ofInstant(instant, ZoneId.systemDefault())
                 : null;
     }
 
@@ -41,5 +41,4 @@ public class CommentMapper {
                 ? localDateTime.atZone(ZoneId.systemDefault()).toInstant()
                 : null;
     }
-
 }

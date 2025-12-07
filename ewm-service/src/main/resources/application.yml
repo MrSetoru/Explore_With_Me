@@ -3,13 +3,18 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://ewm_postgres:5432/ewmdb
+    url: jdbc:postgresql://localhost:5432/ewmdb
     username: user
     password: password
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
 
 management:
   endpoints:
@@ -20,4 +25,3 @@ management:
 stat:
   server:
     url: ${STAT_SERVER_URL:http://statserver:9090}
-

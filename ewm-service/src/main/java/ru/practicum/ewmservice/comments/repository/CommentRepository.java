@@ -8,9 +8,8 @@ import java.util.Collection;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Long> {
-    
+
     Collection<Comment> findAllByCreatorId(Long userId);
 
     Collection<Comment> findAllByEventId(Long eventId);
-
 }

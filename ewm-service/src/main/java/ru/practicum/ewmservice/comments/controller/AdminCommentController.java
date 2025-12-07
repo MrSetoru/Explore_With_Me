@@ -21,5 +21,4 @@ public class AdminCommentController {
         log.info("Комментарий удалён");
         return ResponseEntity.noContent().build();
     }
-
 }
