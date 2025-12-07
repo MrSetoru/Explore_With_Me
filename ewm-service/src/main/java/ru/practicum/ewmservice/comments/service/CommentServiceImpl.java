@@ -105,5 +105,4 @@ public class CommentServiceImpl implements CommentService {
                 .orElseThrow(() -> new NotFoundException("События с id = " + eventId + " не найдено"));
 
     }
-
 }

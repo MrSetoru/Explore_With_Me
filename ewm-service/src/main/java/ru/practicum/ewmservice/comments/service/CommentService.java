@@ -19,5 +19,4 @@ public interface CommentService {
     void deleteComment(Long commentId);
 
     Collection<CommentDtoToResponse> getEventComments(Long eventId);
-
 }

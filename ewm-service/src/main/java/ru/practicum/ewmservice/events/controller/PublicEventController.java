@@ -25,24 +25,24 @@ public class PublicEventController {
 
     @GetMapping
     public ResponseEntity<Collection<EventDtoFull>> getAllEventsPublicFilter(@RequestParam(required = false) String text,
-                                                                       @RequestParam(required = false) List<Long> categories,
-                                                                       @RequestParam(required = false) Boolean paid,
-                                                                       @RequestParam(required = false) String rangeStart,
-                                                                       @RequestParam(required = false) String rangeEnd,
-                                                                       @RequestParam(defaultValue = "false") boolean onlyAvailable,
-                                                                       @RequestParam(required = false) String sort,
-                                                                       @RequestParam(name = "from", defaultValue = "0") Integer from,
-                                                                       @RequestParam(name = "size", defaultValue = "10") Integer size,
-                                                                       HttpServletRequest request) {
+                                                                             @RequestParam(required = false) List<Long> categories,
+                                                                             @RequestParam(required = false) Boolean paid,
+                                                                             @RequestParam(required = false) String rangeStart,
+                                                                             @RequestParam(required = false) String rangeEnd,
+                                                                             @RequestParam(defaultValue = "false") boolean onlyAvailable,
+                                                                             @RequestParam(required = false) String sort,
+                                                                             @RequestParam(name = "from", defaultValue = "0") Integer from,
+                                                                             @RequestParam(name = "size", defaultValue = "10") Integer size,
+                                                                             HttpServletRequest request) {
         log.info("Публичный запрос на получение всех событий с сортировкой");
         log.info("client ip: {}", request.getRemoteAddr());
         log.info("endpoint path: {}", request.getRequestURI());
 
         if ("0".equals(text)) {
-            throw new ConditionsNotMetException("Параметр text не может быть 0");
+            throw new ConditionsNotMetException("Параметр text не должен быть 0");
         }
         if (categories != null && categories.size() == 1 && categories.get(0) == 0) {
-            throw new ConditionsNotMetException("Параметр categories не может быть 0");
+            throw new ConditionsNotMetException("Параметр categories не должен быть 0");
         }
 
         Collection<EventDtoFull> events = eventService.getAllEventsPublicFilter(text, categories, paid, rangeStart, rangeEnd, onlyAvailable, sort, from, size, request);
@@ -52,7 +52,7 @@ public class PublicEventController {
 
     @GetMapping("/{eventId}")
     public ResponseEntity<EventDtoFull> getEventById(@PathVariable Long eventId,
-                                                      HttpServletRequest request) {
+                                                     HttpServletRequest request) {
         log.info("Публичный запрос на получение события по id");
         log.info("client ip: {}", request.getRemoteAddr());
         log.info("endpoint path: {}", request.getRequestURI());
