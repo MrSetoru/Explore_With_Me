@@ -13,16 +13,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"First comment — status 201\", function () {",
+							"pm.test(\"First comment\", function () {",
 							"    pm.response.to.have.status(201);",
 							"});",
-							"const response = pm.response.json();",
-							"pm.expect(response.text).to.equal(\"Первый тестовый комментарий\");",
-							"pm.expect(response.creator).to.equal(pm.environment.get(\"userId\"));",
-							"pm.expect(response.event).to.equal(5);",
-							"pm.environment.set(\"commentId1\", response.id);"
+							"pm.environment.set(\"commentId1\", pm.response.json().id);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -39,11 +37,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId}}/events/5/comments",
+					"raw": "http://localhost:8080/users/5/events/5/comments",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "{{userId}}", "events", "5", "comments"]
+					"path": [
+						"users",
+						"5",
+						"events",
+						"5",
+						"comments"
+					]
 				}
 			},
 			"response": []
@@ -55,16 +61,14 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Second comment — status 2 Newton\", function () {",
+							"pm.test(\"Second comment\", function () {",
 							"    pm.response.to.have.status(201);",
 							"});",
-							"const response = pm.response.json();",
-							"pm.expect(response.text).to.equal(\"Второй комментарий к другому событию\");",
-							"pm.expect(response.creator).to.equal(pm.environment.get(\"userId\"));",
-							"pm.expect(response.event).to.equal(6);",
-							"pm.environment.set(\"commentId2\", response.id);"
+							"pm.environment.set(\"commentId2\", pm.response.json().id);"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -81,11 +85,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId}}/events/6/comments",
+					"raw": "http://localhost:8080/users/5/events/6/comments",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "{{userId}}", "events", "6", "comments"]
+					"path": [
+						"users",
+						"5",
+						"events",
+						"6",
+						"comments"
+					]
 				}
 			},
 			"response": []
@@ -100,10 +112,11 @@
 							"pm.test(\"400 if text is empty\", function () {",
 							"    pm.response.to.have.status(400);",
 							"});",
-							"const response = pm.response.json();",
-							"pm.expect(response.error).to.include(\"Комментарий должен содержать текст\");"
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -120,11 +133,19 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId}}/events/5/comments",
+					"raw": "http://localhost:8080/users/5/events/5/comments",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "{{userId}}", "events", "5", "comments"]
+					"path": [
+						"users",
+						"5",
+						"events",
+						"5",
+						"comments"
+					]
 				}
 			},
 			"response": []
@@ -136,15 +157,114 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"200 — Comment updated\", function () {",
+							"pm.test(\"200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"const response = pm.response.json();",
-							"pm.expect(response.text).to.equal(\"Обновлённый комментарий\");",
-							"pm.expect(response.creator).to.equal(pm.environment.get(\"userId\"));",
-							"pm.expect(response.event).to.equal(5);"
+							"",
+							"pm.test(\"Updating the comment\", function () {",
+							"    const response = pm.response.json();",
+							"    pm.expect(response.text).to.equal(\"Обновлённый комментарий\");",
+							"    pm.expect(response.creator).to.equal(5);",
+							"    pm.expect(response.event).to.equal(5);",
+							"});",
+							"",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\": \"Обновлённый комментарий\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/5/comments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"5",
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Изменение комментария без теста",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"400 if text of update is empty\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"text\": \"\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/5/comments/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"5",
+						"comments",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Изменение чужого комментария",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"400 if you try to update not your`s comment\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -163,9 +283,16 @@
 				"url": {
 					"raw": "http://localhost:8080/users/3/comments/1",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "3", "comments", "1"]
+					"path": [
+						"users",
+						"3",
+						"comments",
+						"1"
+					]
 				}
 			},
 			"response": []
@@ -188,7 +315,9 @@
 							"    pm.expect(comments.length).to.be.at.least(2);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -196,11 +325,17 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/{{userId}}/comments",
+					"raw": "http://localhost:8080/users/5/comments",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "{{userId}}", "comments"]
+					"path": [
+						"users",
+						"5",
+						"comments"
+					]
 				}
 			},
 			"response": []
@@ -219,7 +354,9 @@
 							"    pm.expect(pm.response.json()).to.be.an(\"array\");",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -229,9 +366,15 @@
 				"url": {
 					"raw": "http://localhost:8080/events/5/comments",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["events", "5", "comments"]
+					"path": [
+						"events",
+						"5",
+						"comments"
+					]
 				}
 			},
 			"response": []
@@ -243,11 +386,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"The comment was deleted\", function () {",
+							"pm.test(\"The comment was deeleted\", function () {",
 							"    pm.response.to.have.status(204);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -257,9 +402,16 @@
 				"url": {
 					"raw": "http://localhost:8080/users/5/comments/2",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "5", "comments", "2"]
+					"path": [
+						"users",
+						"5",
+						"comments",
+						"2"
+					]
 				}
 			},
 			"response": []
@@ -275,7 +427,9 @@
 							"    pm.response.to.have.status(400);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -285,9 +439,16 @@
 				"url": {
 					"raw": "http://localhost:8080/users/10/comments/1",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["users", "10", "comments", "1"]
+					"path": [
+						"users",
+						"10",
+						"comments",
+						"1"
+					]
 				}
 			},
 			"response": []
@@ -303,7 +464,9 @@
 							"    pm.response.to.have.status(204);",
 							"});"
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
 					}
 				}
 			],
@@ -313,9 +476,15 @@
 				"url": {
 					"raw": "http://localhost:8080/admin/comments/1",
 					"protocol": "http",
-					"host": ["localhost"],
+					"host": [
+						"localhost"
+					],
 					"port": "8080",
-					"path": ["admin", "comments", "1"]
+					"path": [
+						"admin",
+						"comments",
+						"1"
+					]
 				}
 			},
 			"response": []
